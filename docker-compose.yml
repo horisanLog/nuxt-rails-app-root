@@ -42,8 +42,8 @@ services:
       - "./api:/$WORKDIR"
     ports:
       - "3000:3000"
-    # environment:
-    #   RAILS_ENV: development
+    environment:
+      API_DOMAIN: "localhost:$FRONT_PORT" 
     depends_on:
       - db
 
@@ -52,6 +52,7 @@ services:
       context: ./front
       args:
         WORKDIR: $WORKDIR
+        API_URL: "http://localhost:$API_PORT"
     # コンテナで実行したいコマンド(CMD)
     command: yarn run dev
     volumes:
