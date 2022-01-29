@@ -37,13 +37,14 @@ services:
       context: ./api
       args:
         WORKDIR: $WORKDIR
-    command: bundle exec rails s -p 3000 -b '0.0.0.0' && bundle exec rake db:seed_fu && /bin/bash
+    # command: bundle exec rails s -p 3000 -b '0.0.0.0' && bundle exec rake db:seed_fu && /bin/bash
     volumes:
       - "./api:/$WORKDIR"
     ports:
       - "3000:3000"
     environment:
-      API_DOMAIN: "localhost:$FRONT_PORT" 
+      API_DOMAIN: "localhost:$FRONT_PORT"
+      BASE_URL: "http://localhost:$API_PORT"
     depends_on:
       - db
 
